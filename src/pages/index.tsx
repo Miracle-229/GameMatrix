@@ -1,8 +1,8 @@
 import { getNewGamesData, getRatingGamesData } from '@/api/api';
-
-import Carousel from '@/components/screens/home/Carousel';
 import Layout from '@/components/layouts/Layout';
-import GameRow from '@/components/screens/home/GameRow';
+import Carousel from '@/pageSections/home/Carousel';
+import GameRow from '@/pageSections/home/GameRow';
+
 import { IGameData } from '@/types/home';
 
 interface HomePageProps {

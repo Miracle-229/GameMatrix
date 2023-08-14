@@ -2,7 +2,7 @@ import { getNewGamesData } from '@/api/api';
 import { IGameData } from '@/types/home';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useId, useState } from 'react';
 import {
   BsWindows,
   BsXbox,
@@ -18,13 +18,14 @@ interface Props {
 }
 
 const GameRow = ({ data }: Props) => {
-  const gameList = data.slice(0, 8).map((item: IGameData, index: number) => {
+  const id=useId()
+  const gameList = data.slice(0, 8).map((item: IGameData) => {
     console.log(item.metacritic);
     return (
       <div
         style={{ marginTop: '30px' }}
         className="col-md-3 col-sm-6"
-        key={index}
+        key={id}
       >
         <div className="card" style={{ height: '11em' }}>
           <Link href={`/games/${item.slug}`}>
