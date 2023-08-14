@@ -5,7 +5,6 @@ type Props = {};
 
 const Footer = (props: Props) => {
   return (
-    <>
       <div className="container" style={{ color: '#5a606b', padding: '0px' }}>
         <hr className="mt-5" style={{ borderTop: '1px solid #5a606b' }} />
         <Image src="/logo.png" height={59} width={59} alt="GameMatrix" />
@@ -14,7 +13,6 @@ const Footer = (props: Props) => {
           Все игры в одной матрице на GameMatrix!
         </p>
       </div>
-    </>
   );
 };
 
