@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API_KEY = '9be60daafabb43db8e41e7bff910446b';
 const BASE_URL = 'https://api.rawg.io/api/games';
+
 
 interface IGamesOptions {
   date: {
@@ -18,7 +18,7 @@ export async function getGamesData(options: IGamesOptions) {
   try {
     const response = await axios.get(`${BASE_URL}${options.endpoint}`, {
       params: {
-        key: API_KEY,
+        key: process.env.API_KEY,
         dates: `${options.date.start},${options.date.end}`,
         ordering: `${options.ordering}`,
       },
