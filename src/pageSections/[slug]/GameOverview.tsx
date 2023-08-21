@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useId } from 'react';
 import { IGameData } from '@/types/home';
 import {
   BsWindows,
@@ -29,6 +29,29 @@ const genresList = ({ data }: Props) => {
   );
 };
 
+function getPlatformIcon(platformSlug: string) {
+  switch (platformSlug) {
+    case 'pc':
+      return <BsWindows />;
+    case 'playstation':
+      return <BsPlaystation />;
+    case 'xbox':
+      return <BsXbox />;
+    case 'nintendo':
+      return <BsNintendoSwitch />;
+    case 'android':
+      return <BsAndroid2 />;
+    case 'linux':
+      return <SiLinux />;
+    case 'ios':
+      return <BsApple />;
+    case 'mac':
+      return <SiMacos />;
+    default:
+      return null;
+  }
+}
+
 function formatDate(inputDate: string) {
   const [year, month, day] = inputDate.split('-');
   const formattedDate = `${parseInt(day, 10)} ${
@@ -43,6 +66,7 @@ const BackImage = styled.div<{ backgroundImage: string }>`
 `;
 
 const GameOverview = ({ data }: Props) => {
+  const id = useId();
   const {
     name,
     background_image,
@@ -99,40 +123,14 @@ const GameOverview = ({ data }: Props) => {
             <div className="row mt-1">
               <div className="col">
                 <ul className="list-inline">
-                  {parent_platforms.map((platformData: any, index: any) => {
-                    let platformIcon = null;
-                    switch (platformData.platform.slug) {
-                      case 'pc':
-                        platformIcon = <BsWindows />;
-                        break;
-                      case 'playstation':
-                        platformIcon = <BsPlaystation />;
-                        break;
-                      case 'xbox':
-                        platformIcon = <BsXbox />;
-                        break;
-                      case 'nintendo':
-                        platformIcon = <BsNintendoSwitch />;
-                        break;
-                      case 'android':
-                        platformIcon = <BsAndroid2 />;
-                        break;
-                      case 'linux':
-                        platformIcon = <SiLinux />;
-                        break;
-                      case 'ios':
-                        platformIcon = <BsApple />;
-                        break;
-                      case 'mac':
-                        platformIcon = <SiMacos />;
-                        break;
-                      default:
-                        platformIcon = null;
-                    }
+                  {parent_platforms.map((platformData: any) => {
+                    const platformIcon = getPlatformIcon(
+                      platformData.platform.slug
+                    );
                     return (
                       <li
                         className="list-inline-item"
-                        key={index}
+                        key={id}
                         style={{
                           fontWeight: 'bolder',
                           marginBottom: '0px',

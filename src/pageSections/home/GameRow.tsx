@@ -17,16 +17,34 @@ interface Props {
   data: IGameData[];
 }
 
+function getPlatformIcon(platformSlug: string) {
+  switch (platformSlug) {
+    case 'pc':
+      return <BsWindows />;
+    case 'playstation':
+      return <BsPlaystation />;
+    case 'xbox':
+      return <BsXbox />;
+    case 'nintendo':
+      return <BsNintendoSwitch />;
+    case 'android':
+      return <BsAndroid2 />;
+    case 'linux':
+      return <SiLinux />;
+    case 'ios':
+      return <BsApple />;
+    case 'mac':
+      return <SiMacos />;
+    default:
+      return null;
+  }
+}
+
 const GameRow = ({ data }: Props) => {
-  const id=useId()
+  const id = useId();
   const gameList = data.slice(0, 8).map((item: IGameData) => {
-    console.log(item.metacritic);
     return (
-      <div
-        style={{ marginTop: '30px' }}
-        className="col-md-3 col-sm-6"
-        key={id}
-      >
+      <div style={{ marginTop: '30px' }} className="col-md-3 col-sm-6" key={id}>
         <div className="card" style={{ height: '11em' }}>
           <Link href={`/games/${item.slug}`}>
             <Image fill alt={item.name} src={item.background_image}></Image>
@@ -51,25 +69,7 @@ const GameRow = ({ data }: Props) => {
                   color: 'white',
                 }}
               >
-                {platformData.platform.slug === 'pc' ? (
-                  <BsWindows />
-                ) : platformData.platform.slug === 'playstation' ? (
-                  <BsPlaystation />
-                ) : platformData.platform.slug === 'xbox' ? (
-                  <BsXbox />
-                ) : platformData.platform.slug === 'nintendo' ? (
-                  <BsNintendoSwitch />
-                ) : platformData.platform.slug === 'android' ? (
-                  <BsAndroid2 />
-                ) : platformData.platform.slug === 'android' ? (
-                  <BsAndroid2 />
-                ) : platformData.platform.slug === 'linux' ? (
-                  <SiLinux />
-                ) : platformData.platform.slug === 'ios' ? (
-                  <BsApple />
-                ) : platformData.platform.slug === 'mac' ? (
-                  <SiMacos />
-                ) : null}
+                {getPlatformIcon(platformData.platform.slug)}
               </p>
             ))}
           </div>
