@@ -6,40 +6,17 @@ import { Navbar, Nav } from 'react-bootstrap';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { handleSearch } from '@/api/api';
 
 type Props = {};
 
 const Header = (props: Props) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [options, setOptions] = useState([]);
+  const [options, setOptions] = useState<any[]>([]);
 
-  const handleSearch = async (query: string) => {
-    const API_KEY = '9be60daafabb43db8e41e7bff910446b';
-    const BASE_URL = 'https://api.rawg.io/api/games';
-    setIsLoading(true);
-    try {
-      const response = await fetch(
-        `${BASE_URL}?search=${query}&key=${API_KEY}`
-      );
-      const data = await response.json();
-      const parsedData = data.results.map((game: IGameData) => ({
-        poster: game.background_image,
-        date: game.released,
-        label: game.name,
-        rating: game.metacritic || 'N/A',
-        slug:game.slug,
-        platforms: game.parent_platforms
-          .map((platform) => platform.platform.slug)
-          .join(', '),
-      }));
-      setOptions(parsedData);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      setOptions([]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+ async function wrapperHandleSearch(query:string){
+    await handleSearch(query,setIsLoading,setOptions)
+  }
 
   const router = useRouter();
   const handleGameSelect = (selected: any) => {
@@ -60,7 +37,7 @@ const Header = (props: Props) => {
           id="search-bar"
           isLoading={isLoading}
           labelKey="label"
-          onSearch={handleSearch}
+          onSearch={wrapperHandleSearch}
           options={options}
           onChange={handleGameSelect}
           placeholder="Поиск игр..."
@@ -113,9 +90,9 @@ const Header = (props: Props) => {
         <Link
           style={{ color: 'gray', fontWeight: 'bold' }}
           onClick={() => window.scrollTo(0, 0)}
-          href={`/`}
+          href={`/games`}
         >
-          Игры
+          Games
         </Link>
       </Navbar.Collapse>
     </Navbar>
