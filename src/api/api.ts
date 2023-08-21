@@ -1,7 +1,7 @@
+import { IGameData } from '@/types/home';
 import axios from 'axios';
 
 const BASE_URL = 'https://api.rawg.io/api/games';
-
 
 interface IGamesOptions {
   date: {
@@ -82,4 +82,79 @@ export async function getScreenshots(slug: string) {
   };
 
   return await getGamesData(screenshotsOptions);
+}
+
+export const handleSearch = async (
+  query: string,
+  setIsLoading: (value: boolean) => void,
+  setOptions: (options: any[]) => void
+) => {
+  setIsLoading(true);
+  try {
+    const response = await axios.get(`${BASE_URL}`, {
+      params: {
+        key: process.env.API_KEY,
+      },
+    });
+    const data = await response.data;
+    const parsedData = data.results.map((game: IGameData) => ({
+      poster: game.background_image,
+      date: game.released,
+      label: game.name,
+      rating: game.metacritic || 'N/A',
+      slug: game.slug,
+      platforms: game.parent_platforms
+        .map((platform) => platform.platform.slug)
+        .join(', '),
+    }));
+    setOptions(parsedData);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    setOptions([]);
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+export async function getGenres() {
+  const GENRE_URL = 'https://api.rawg.io/api/genres';
+  try {
+    const response = await axios.get(GENRE_URL, {
+      params: {
+        key: process.env.API_KEY,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching genres:', error);
+    return [];
+  }
+}
+
+export async function filterGamesByGenres(genres: number[]) {
+  try {
+    const startDate = new Date(1960, 0, 1);
+    const endDate = new Date();
+
+    const options: IGamesOptions = {
+      date: {
+        start: startDate.toISOString().split('T')[0],
+        end: endDate.toISOString().split('T')[0],
+      },
+      ordering: '-popularity',
+      endpoint: '',
+    };
+    const gamesData = await getGamesData(options); // Получаем все игры по заданным параметрам
+
+    // Фильтруем игры по выбранным жанрам
+    const filteredGames = gamesData.results.filter((game: any) => {
+      const gameGenres = game.genres.map((genre: any) => genre.id);
+      return genres.every((genreId) => gameGenres.includes(genreId));
+    });
+
+    return filteredGames;
+  } catch (error) {
+    console.error('Ошибка при фильтрации игр по жанрам:', error);
+    return [];
+  }
 }
