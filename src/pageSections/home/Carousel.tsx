@@ -1,6 +1,6 @@
 import { getNewGamesData } from '@/api/api';
 import Header from '@/components/header/Header';
-import { useEffect, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import CarouselB from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Image } from 'react-bootstrap';
@@ -12,6 +12,7 @@ interface Props {
 }
 
 const Carousel = ({ data }: Props) => {
+  const id=useId()
   return (
     <>
       <div style={{ padding: '0px' }} className="col">
@@ -21,8 +22,8 @@ const Carousel = ({ data }: Props) => {
           indicators={false}
           interval={3000}
         >
-          {data.map((item, index) => (
-            <CarouselB.Item key={index}>
+          {data.map((item) => (
+            <CarouselB.Item key={id}>
               <div style={{ height: '80vh', width: '100%' }}>
                 <div
                   className="carousel-center"

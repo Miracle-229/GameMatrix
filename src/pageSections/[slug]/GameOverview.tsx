@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+import React, { useId } from 'react';
 import { IGameData } from '@/types/home';
 import {
   BsWindows,
@@ -8,7 +9,9 @@ import {
   BsAndroid2,
   BsApple,
 } from 'react-icons/bs';
+import styled from 'styled-components';
 import { SiLinux, SiMacos } from 'react-icons/si';
+import { months } from '@/constants/constants';
 
 interface Props {
   data: IGameData;
@@ -26,41 +29,60 @@ const genresList = ({ data }: Props) => {
   );
 };
 
-const formatDate = (inputDate: string) => {
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
+function getPlatformIcon(platformSlug: string) {
+  switch (platformSlug) {
+    case 'pc':
+      return <BsWindows />;
+    case 'playstation':
+      return <BsPlaystation />;
+    case 'xbox':
+      return <BsXbox />;
+    case 'nintendo':
+      return <BsNintendoSwitch />;
+    case 'android':
+      return <BsAndroid2 />;
+    case 'linux':
+      return <SiLinux />;
+    case 'ios':
+      return <BsApple />;
+    case 'mac':
+      return <SiMacos />;
+    default:
+      return null;
+  }
+}
 
+function formatDate(inputDate: string) {
   const [year, month, day] = inputDate.split('-');
   const formattedDate = `${parseInt(day, 10)} ${
     months[parseInt(month, 10) - 1]
   } ${year}`;
 
   return formattedDate;
-};
+}
+
+const BackImage = styled.div<{ backgroundImage: string }>`
+  background-image: ${({ backgroundImage }) => `url(${backgroundImage})`};
+`;
 
 const GameOverview = ({ data }: Props) => {
+  const id = useId();
+  const {
+    name,
+    background_image,
+    metacritic,
+    publishers,
+    parent_platforms,
+    description_raw,
+  } = data;
   const formattedReleasedDate = data.released ? formatDate(data.released) : '';
   return (
     <>
       <div className="col text-center" style={{ padding: '0' }}>
-        <div
-          style={{
-            backgroundImage: `url(${data.background_image})`,
-          }}
+        <BackImage
+          backgroundImage={background_image}
           className="back-img-game"
-        ></div>
+        />
         <div
           className="carousel-caption"
           style={{
@@ -69,7 +91,7 @@ const GameOverview = ({ data }: Props) => {
             backgroundColor: 'rgba(21,28,38,0.6)',
           }}
         >
-          {data.name}
+          {name}
         </div>
       </div>
       <div className="container">
@@ -101,11 +123,14 @@ const GameOverview = ({ data }: Props) => {
             <div className="row mt-1">
               <div className="col">
                 <ul className="list-inline">
-                  {data.parent_platforms.map(
-                    (platformData: any, index: any) => (
+                  {parent_platforms.map((platformData: any) => {
+                    const platformIcon = getPlatformIcon(
+                      platformData.platform.slug
+                    );
+                    return (
                       <li
                         className="list-inline-item"
-                        key={index}
+                        key={id}
                         style={{
                           fontWeight: 'bolder',
                           marginBottom: '0px',
@@ -114,28 +139,10 @@ const GameOverview = ({ data }: Props) => {
                           fontSize: '30px',
                         }}
                       >
-                        {platformData.platform.slug === 'pc' ? (
-                          <BsWindows />
-                        ) : platformData.platform.slug === 'playstation' ? (
-                          <BsPlaystation />
-                        ) : platformData.platform.slug === 'xbox' ? (
-                          <BsXbox />
-                        ) : platformData.platform.slug === 'nintendo' ? (
-                          <BsNintendoSwitch />
-                        ) : platformData.platform.slug === 'android' ? (
-                          <BsAndroid2 />
-                        ) : platformData.platform.slug === 'android' ? (
-                          <BsAndroid2 />
-                        ) : platformData.platform.slug === 'linux' ? (
-                          <SiLinux />
-                        ) : platformData.platform.slug === 'ios' ? (
-                          <BsApple />
-                        ) : platformData.platform.slug === 'mac' ? (
-                          <SiMacos />
-                        ) : null}
+                        {platformIcon}
                       </li>
-                    )
-                  )}
+                    );
+                  })}
                 </ul>
               </div>
             </div>
@@ -156,7 +163,7 @@ const GameOverview = ({ data }: Props) => {
                     color: 'white',
                   }}
                 >
-                  {data.metacritic ? data.metacritic : 'N/A'}
+                  {metacritic ? metacritic : 'N/A'}
                 </p>
               </div>
             </div>
@@ -171,14 +178,14 @@ const GameOverview = ({ data }: Props) => {
           </div>
           <div className="col-md-3">
             <p style={{ color: '#5a606b', fontWeight: 'bolder' }}>CREATORS</p>
-            <p style={{ color: 'white' }}>{data.publishers[0].name}</p>
+            <p style={{ color: 'white' }}>{publishers[0].name}</p>
           </div>
         </div>
         <div className="row mt-3">
           <div className="col">
             <div className="mt-3">
               <p style={{ color: '#5a606b', fontWeight: 'bolder' }}>OVERVIEW</p>
-              <p style={{ color: 'white' }}>{data.description_raw}</p>
+              <p style={{ color: 'white' }}>{description_raw}</p>
             </div>
           </div>
         </div>

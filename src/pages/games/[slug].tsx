@@ -1,10 +1,12 @@
 import { getGame, getScreenshots } from '@/api/api';
 import { GetServerSidePropsContext } from 'next';
 import Layout from '@/components/layouts/Layout';
-import GameOverview from '@/components/screens/[slug]/GameOverview';
-import GameScreenshots from '@/components/screens/[slug]/GameScreenshots';
 import { IGameData } from '@/types/home';
 import React from 'react';
+import GameOverview from '@/pageSections/[slug]/GameOverview';
+import GameScreenshots from '@/pageSections/[slug]/GameScreenshots';
+
+
 
 interface SlugPageProps {
   game: IGameData;
