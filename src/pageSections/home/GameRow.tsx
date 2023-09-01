@@ -42,9 +42,9 @@ function getPlatformIcon(platformSlug: string) {
 
 const GameRow = ({ data }: Props) => {
   const id = useId();
-  const gameList = data.slice(0, 8).map((item: IGameData) => {
+  const gameList = data.slice(0, 8).map((item: IGameData,index) => {
     return (
-      <div style={{ marginTop: '30px' }} className="col-md-3 col-sm-6" key={id}>
+      <div style={{ marginTop: '30px' }} className="col-md-3 col-sm-6" key={index}>
         <div className="card" style={{ height: '11em' }}>
           <Link href={`/games/${item.slug}`}>
             <Image fill alt={item.name} src={item.background_image}></Image>
