@@ -89,13 +89,15 @@ export const handleSearch = async (
   setIsLoading: (value: boolean) => void,
   setOptions: (options: any[]) => void
 ) => {
+  const API_KEY = '9be60daafabb43db8e41e7bff910446b';
+  const BASE_URL = 'https://api.rawg.io/api/games';
+  const page = 1; // Ваша текущая страница
+  const pageSize = 20; // Количество результатов на странице
   setIsLoading(true);
   try {
-    const response = await axios.get(`${BASE_URL}`, {
-      params: {
-        key: process.env.API_KEY,
-      },
-    });
+    const response = await axios.get(
+      `${BASE_URL}?search=${query}&key=${API_KEY}&page=${page}&page_size=${pageSize}`
+    );
     const data = await response.data;
     const parsedData = data.results.map((game: IGameData) => ({
       poster: game.background_image,
