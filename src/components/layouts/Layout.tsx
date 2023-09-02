@@ -1,17 +1,34 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
+import Head from 'next/head';
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
-import { Providers } from '@/pageSections/Providers';
+import { useTranslations } from 'next-intl';
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+type Props = {
+  children?: ReactNode;
+  title: string;
+};
+
+const Layout = ({children, title}: Props) => {
+  const t = useTranslations('PageLayout');
   return (
-    <Providers>
-      <section>
+    <>
+      <Head>
+        <title>{[title, t('pageTitle')].join(' - ')}</title>
+      </Head>
+      <section
+        style={{
+          minHeight: '100vh',
+          overflow: 'hidden',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
         <Header />
         {children}
         <Footer />
       </section>
-    </Providers>
+    </>
   );
 };
 

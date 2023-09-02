@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import { BiSolidUser, BiSolidBookmarks, BiSolidDoorOpen } from 'react-icons/bi';
 import { handleSearch } from '@/api/api';
 import { useSession, signOut } from 'next-auth/react';
+import LocaleSwitcher from '../switcher/LocaleSwitcher';
 
 type Props = {};
 
@@ -108,7 +109,7 @@ const Header = (props: Props) => {
               <Link
                 style={{ color: 'gray' }}
                 onClick={() => window.scrollTo(0, 0)}
-                href={`/account_movies`}
+                href={`/profile`}
               >
                 <BiSolidBookmarks style={{ marginBottom: '3px' }} /> Collection
               </Link>
@@ -133,6 +134,7 @@ const Header = (props: Props) => {
           </Link>
         )}
       </Navbar.Collapse>
+      <LocaleSwitcher/>
     </Navbar>
   );
 };
