@@ -113,19 +113,6 @@ const GameRow = ({ data }: Props) => {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <div className="row mt-5">
-          <div className="col">
-            {data[0].id !== 3498 ? (
-              <p className="font-weight-bold" style={{ color: '#5a606b' }}>
-                ПОПУЛЯРНЫЕ ИГРЫ НА ЭТОЙ НЕДЕЛЕ
-              </p>
-            ) : (
-              <p className="font-weight-bold" style={{ color: '#5a606b' }}>
-                САМЫЕ РЕЙТИНГОВЫЕ ИГРЫ
-              </p>
-            )}
-          </div>
-        </div>
       </div>
       <div className="row">{gameList}</div>
     </div>
