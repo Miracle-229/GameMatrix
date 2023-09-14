@@ -1,0 +1,13 @@
+{
+  "Index": {
+    "title": "GameMatrix",
+    "titleRowRating": "Most rating games",
+    "titleRowNew": "Popular games for the week"
+  },
+  "LocaleSwitcher": {
+    "switchLocale": "Switch to Russian"
+  },
+  "Footer": {
+    "title": "All games in one matrix on Game Matrix!"
+  }
+}

@@ -1,11 +1,11 @@
 import { getGenres, getNewGamesData, getRatingGamesData } from '@/api/api';
 import Header from '@/components/header/Header';
 import GameList from '@/pageSections/games/GameList';
-import { IGameData } from '@/types/home';
+import { IGameData, } from '@/types/home';
 import React, { useEffect, useId, useState } from 'react';
 
 interface HomePageProps {
-  topRateData: IGameData[];
+  topRateData: any;
   genresData: {
     id: number;
     name: string;

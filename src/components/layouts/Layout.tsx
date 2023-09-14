@@ -1,15 +1,32 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
+import Head from 'next/head';
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
+import { useTranslations } from 'next-intl';
 
+type Props = {
+  children?: ReactNode;
+  title: string;
+};
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children, title }: Props) => {
   return (
-    <section>
-      <Header />
-      {children}
-      <Footer />
-    </section>
+    <>
+      <Head>
+      </Head>
+      <section
+        style={{
+          minHeight: '100vh',
+          overflow: 'hidden',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <Header />
+        {children}
+        <Footer />
+      </section>
+    </>
   );
 };
 

@@ -1,0 +1,13 @@
+{
+  "Index": {
+    "title": "GameMatrix",
+    "titleRowRating": "Самые рейтинговые игры",
+    "titleRowNew": "Популярные игры на этой недели"
+  },
+  "LocaleSwitcher": {
+    "switchLocale": "Переключиться на {locale, select, de {Немецкий} en {Английский} other {Неизвестный}}"
+  },
+  "Footer": {
+    "title": "Все игры в одной матрице на GameMatrix!"
+  }
+}

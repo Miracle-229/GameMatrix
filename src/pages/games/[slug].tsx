@@ -6,8 +6,6 @@ import React from 'react';
 import GameOverview from '@/pageSections/[slug]/GameOverview';
 import GameScreenshots from '@/pageSections/[slug]/GameScreenshots';
 
-
-
 interface SlugPageProps {
   game: IGameData;
   screenshots: {
@@ -17,7 +15,7 @@ interface SlugPageProps {
 
 const GamePage = ({ game, screenshots }: SlugPageProps) => {
   return (
-    <Layout>
+    <Layout title='Game'>
       <GameOverview data={game} />
       <div className="container">
         <GameScreenshots data={screenshots} />
@@ -33,7 +31,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const slug = context.params?.slug as string;
     const game = await getGame(slug);
     const screenshotsResponse = await getScreenshots(slug);
-    console.log(screenshotsResponse.results);
     return {
       props: {
         game,

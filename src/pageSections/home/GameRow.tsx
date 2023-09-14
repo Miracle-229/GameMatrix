@@ -42,9 +42,9 @@ function getPlatformIcon(platformSlug: string) {
 
 const GameRow = ({ data }: Props) => {
   const id = useId();
-  const gameList = data.slice(0, 8).map((item: IGameData) => {
+  const gameList = data.slice(0, 8).map((item: IGameData,index) => {
     return (
-      <div style={{ marginTop: '30px' }} className="col-md-3 col-sm-6" key={id}>
+      <div style={{ marginTop: '30px' }} className="col-md-3 col-sm-6" key={index}>
         <div className="card" style={{ height: '11em' }}>
           <Link href={`/games/${item.slug}`}>
             <Image fill alt={item.name} src={item.background_image}></Image>
@@ -113,19 +113,6 @@ const GameRow = ({ data }: Props) => {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <div className="row mt-5">
-          <div className="col">
-            {data[0].id !== 3498 ? (
-              <p className="font-weight-bold" style={{ color: '#5a606b' }}>
-                ПОПУЛЯРНЫЕ ИГРЫ НА ЭТОЙ НЕДЕЛЕ
-              </p>
-            ) : (
-              <p className="font-weight-bold" style={{ color: '#5a606b' }}>
-                САМЫЕ РЕЙТИНГОВЫЕ ИГРЫ
-              </p>
-            )}
-          </div>
-        </div>
       </div>
       <div className="row">{gameList}</div>
     </div>

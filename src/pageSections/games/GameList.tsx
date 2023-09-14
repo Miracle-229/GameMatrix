@@ -47,7 +47,6 @@ function getPlatformIcon(platformSlug: string) {
 const GameList = ({ data, genresData }: Props) => {
   const [selectedGenres, setSelectedGenres] = useState<any[]>([]);
   const [movies, setMovies] = useState(data);
-  const id = useId();
 
   const genreClick = async (genre_id: number) => {
     let newSelectedGenres;
@@ -60,11 +59,11 @@ const GameList = ({ data, genresData }: Props) => {
     setMovies(await filterGamesByGenres(newSelectedGenres));
   };
 
-  const gameList = movies.map((item: IGameData) => {
+  const gameList = movies.map((item: IGameData,index:number) => {
     return (
-      <div style={{ marginTop: '30px' }} className="col-md-3 col-sm-6" key={id}>
+      <div style={{ marginTop: '30px' }} className="col-md-3 col-sm-6" key={index}>
         <div className="card" style={{ height: '11em' }}>
-          <Link href={`/games/${item.slug}`}>
+          <Link href="/games/${item.slug}">
             <Image fill alt={item.name} src={item.background_image}></Image>
           </Link>
         </div>
