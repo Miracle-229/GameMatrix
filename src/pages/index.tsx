@@ -22,7 +22,7 @@ const HomePage = ({ nowPlayingData, topRateData }: HomePageProps) => {
           style={{ display: 'flex', justifyContent: 'center' }}
           className="row mt-5"
         >
-          <p className="font-weight-bold" style={{ color: '#5a606b' }}>
+          <p className="font-weight-bold" style={{ color: '#5a606b',textTransform:"uppercase" }}>
             {t('titleRowNew')}
           </p>
         </div>
@@ -31,7 +31,7 @@ const HomePage = ({ nowPlayingData, topRateData }: HomePageProps) => {
           style={{ display: 'flex', justifyContent: 'center' }}
           className="row mt-5"
         >
-          <p className="font-weight-bold" style={{ color: '#5a606b' }}>
+          <p className="font-weight-bold" style={{ color: '#5a606b',textTransform:"uppercase" }}>
             {t('titleRowRating')}
           </p>
         </div>

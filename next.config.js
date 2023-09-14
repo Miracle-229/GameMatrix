@@ -7,11 +7,11 @@ const env = dotenv.parse(fs.readFileSync('.env'));
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['media.rawg.io','lh3.googleusercontent.com'],
+    domains: ['media.rawg.io', 'lh3.googleusercontent.com'],
   },
-  i18n:{
-    locales:['en','ru'],
-    defaultLocale:"en"
+  i18n: {
+    locales: ['en', 'ru'],
+    defaultLocale: 'en',
   },
   env: env,
 };

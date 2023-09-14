@@ -1,8 +1,8 @@
 {
   "Index": {
     "title": "GameMatrix",
-    "titleRowRating": "MOST RATING GAMES",
-    "titleRowNew": "POPULAR GAMES FOR THIS WEEK"
+    "titleRowRating": "Most rating games",
+    "titleRowNew": "Popular games for the week"
   },
   "LocaleSwitcher": {
     "switchLocale": "Switch to Russian"

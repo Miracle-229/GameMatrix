@@ -9,12 +9,10 @@ type Props = {
   title: string;
 };
 
-const Layout = ({children, title}: Props) => {
-  const t = useTranslations('PageLayout');
+const Layout = ({ children, title }: Props) => {
   return (
     <>
       <Head>
-        <title>{[title, t('pageTitle')].join(' - ')}</title>
       </Head>
       <section
         style={{

@@ -25,7 +25,6 @@ const Header = (props: Props) => {
 
   const router = useRouter();
   const handleGameSelect = (selected: any) => {
-    console.log(selected);
     if (selected.length > 0) {
       const slug = selected[0].slug;
       router.push(`/games/${slug}`);
@@ -39,7 +38,6 @@ const Header = (props: Props) => {
       </Link>
       <Nav className="me-auto">
         <AsyncTypeahead
-          key={id}
           id="search-bar"
           isLoading={isLoading}
           labelKey="label"
@@ -96,7 +94,7 @@ const Header = (props: Props) => {
         <Link
           style={{ color: 'gray', fontWeight: 'bold' }}
           onClick={() => window.scrollTo(0, 0)}
-          href={`/games`}
+          href="/games"
         >
           Games
         </Link>
@@ -109,7 +107,7 @@ const Header = (props: Props) => {
               <Link
                 style={{ color: 'gray' }}
                 onClick={() => window.scrollTo(0, 0)}
-                href={`/profile`}
+                href="/profile"
               >
                 <BiSolidBookmarks style={{ marginBottom: '3px' }} /> Collection
               </Link>
@@ -128,7 +126,7 @@ const Header = (props: Props) => {
           <Link
             style={{ color: 'gray' }}
             onClick={() => window.scrollTo(0, 0)}
-            href={`/api/auth/signin`}
+            href="/api/auth/signin`"
           >
             <BiSolidDoorOpen size={30} />
           </Link>
